@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Animal from './components/Animal';
+import {animals} from './data/AnimalsDb';
 
 function App() {
+  const selectRandomAnimal = () => {
+    const randomIndex = Math.floor(Math.random() * animals.length);
+    return animals[randomIndex].name;
+  }
+
+  const [randomAnimal, setRandomAnimal] = useState(selectRandomAnimal());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="container">
+      <header className="border-orange">
+        <h1>Animal Matching Game</h1>
       </header>
+      <div className="border">
+        <Animal randomAnimal={randomAnimal}
+        setRandomAnimal={setRandomAnimal}
+        animals ={animals}/>
+      </div>
     </div>
   );
 }
